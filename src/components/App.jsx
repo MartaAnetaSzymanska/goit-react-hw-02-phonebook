@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { Form } from "./Form/Form";
+import { nanoid } from "nanoid";
+import { ContactList } from "./ContactList/ContactList";
 
 export class App extends Component {
   state = {
@@ -10,13 +12,20 @@ export class App extends Component {
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
   };
-
+  addContact = (name) => {
+    const newContact = { id: nanoid(), name };
+    this.setState((prevState) => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
   render() {
     const { contacts } = this.state;
     return (
       <>
         <h1>Phonebook</h1>
-        <Form contacts={contacts}></Form>
+        <Form contacts={contacts} addContact={this.addContact}></Form>
+        <h2>Contacts</h2>
+        <ContactList contacts={contacts}></ContactList>
       </>
     );
   }
