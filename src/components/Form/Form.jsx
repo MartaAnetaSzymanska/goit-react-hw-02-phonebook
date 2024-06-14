@@ -29,8 +29,15 @@ export class Form extends Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
     const { name, number } = this.state;
-    this.props.addContact(name, number);
-    this.setState({ name: "", number: "" });
+    const isContactExist = this.props.contacts.some(
+      (contact) => contact.name.toLowerCase() === name.toLowerCase(),
+    );
+    if (isContactExist) {
+      alert(`Contact with the name: ${name} already exists.`);
+    } else {
+      this.props.addContact(name, number);
+      this.setState({ name: "", number: "" });
+    }
   };
 
   render() {
