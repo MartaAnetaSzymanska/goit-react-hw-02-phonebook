@@ -12,8 +12,8 @@ export class App extends Component {
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
   };
-  addContact = (name) => {
-    const newContact = { id: nanoid(), name };
+  addContact = (name, number) => {
+    const newContact = { id: nanoid(), name, number };
     this.setState((prevState) => ({
       contacts: [...prevState.contacts, newContact],
     }));
